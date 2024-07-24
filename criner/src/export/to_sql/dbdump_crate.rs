@@ -100,7 +100,7 @@ fn do_it(input_statement: &mut rusqlite::Statement, transaction: &rusqlite::Tran
             "
             INSERT OR IGNORE INTO 'crates.io-crate_version'
                      (parent_id, crate_name, semver, created_at, updated_at, downloads, features, license, crate_size, published_by, is_yanked)
-              VALUES (?1       , ?2        , ?3        , ?4        , ?5        , ?6       , ?7      , ?8 , ?9        , ?10         , , ?11);
+              VALUES (?1       , ?2        , ?3    , ?4        , ?5        , ?6       , ?7      , ?8     , ?9        , ?10         , ?11);
         ",
         )
         .unwrap();
