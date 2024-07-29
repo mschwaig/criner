@@ -74,3 +74,18 @@ where
     decode.info(format!("Decoded {} {} into memory", vec.len(), name));
     Ok(vec)
 }
+
+pub fn mapping_downloads(
+    rd: impl std::io::Read,
+    name: &'static str,
+    progress: &mut prodash::tree::Item,
+) -> crate::Result<BTreeMap<csv_model::Id, u64>> {
+    let mut decode = progress.add_child("decoding");
+    decode.init(None, Some(name.into()));
+    let mut map = BTreeMap::new();
+    records(rd, &mut decode, |v: csv_model::CrateDownloads| {
+        map.insert(v.id, v.downloads);
+    })?;
+    decode.info(format!("Decoded {} {} into memory", map.len(), name));
+    Ok(map)
+}

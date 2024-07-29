@@ -45,8 +45,15 @@ pub struct Crate {
     pub repository: Option<String>,
 }
 
+
 fn default_downloads() -> u64 {
     13371337
+}
+
+#[derive(Deserialize)]
+pub struct CrateDownloads {
+    pub id: Id,
+    pub downloads: u64,
 }
 
 pub enum UserKind {

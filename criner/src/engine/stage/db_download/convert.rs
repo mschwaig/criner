@@ -254,6 +254,7 @@ pub fn into_crates(
     actors_by_id: BTreeMap<(db_dump::Id, db_dump::ActorKind), db_dump::Actor>,
     crate_owners: Vec<csv_model::CrateOwner>,
     mut versions_by_crate_id: BTreeMap<db_dump::Id, Vec<db_dump::CrateVersion>>,
+    crate_downloads: BTreeMap<csv_model::Id, u64>,
     mut progress: prodash::tree::Item,
 ) -> Vec<db_dump::Crate> {
     let mut crate_by_id = BTreeMap::new();
@@ -271,6 +272,12 @@ pub fn into_crates(
         });
         versions.sort_by_key(|v| parse_semver(&v.semver));
         krate.versions = versions;
+
+        // Update the downloads count from crate_downloads
+        if let Some(downloads) = crate_downloads.get(&crate_id) {
+            krate.downloads = *downloads;
+        }
+
         crate_by_id.insert(crate_id, krate);
     }
     drop(versions_by_crate_id);
