@@ -52,7 +52,7 @@ fn default_downloads() -> u64 {
 
 #[derive(Deserialize)]
 pub struct CrateDownloads {
-    pub id: Id,
+    pub crate_id: Id,
     pub downloads: u64,
 }
 

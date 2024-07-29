@@ -84,7 +84,7 @@ pub fn mapping_downloads(
     decode.init(None, Some(name.into()));
     let mut map = BTreeMap::new();
     records(rd, &mut decode, |v: csv_model::CrateDownloads| {
-        map.insert(v.id, v.downloads);
+        map.insert(v.crate_id, v.downloads);
     })?;
     decode.info(format!("Decoded {} {} into memory", map.len(), name));
     Ok(map)
