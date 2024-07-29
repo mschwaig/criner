@@ -95,7 +95,6 @@ impl From<csv_model::Crate> for db_dump::Crate {
             updated_at,
             description,
             documentation,
-            downloads,
             homepage,
             readme,
             repository,
@@ -113,7 +112,7 @@ impl From<csv_model::Crate> for db_dump::Crate {
             updated_at,
             description,
             documentation,
-            downloads,
+            downloads: 0,  // Initialize downloads to 0
             homepage,
             readme,
             repository,
@@ -273,10 +272,8 @@ pub fn into_crates(
         versions.sort_by_key(|v| parse_semver(&v.semver));
         krate.versions = versions;
 
-        // Update the downloads count from crate_downloads
-        if let Some(downloads) = crate_downloads.get(&crate_id) {
-            krate.downloads = *downloads;
-        }
+        // Set the downloads count from crate_downloads.csv
+        krate.downloads = *crate_downloads.get(&crate_id).unwrap_or(&0);
 
         crate_by_id.insert(crate_id, krate);
     }

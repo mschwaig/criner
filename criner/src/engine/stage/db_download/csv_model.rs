@@ -38,16 +38,9 @@ pub struct Crate {
     pub updated_at: SystemTime,
     pub description: Option<String>,
     pub documentation: Option<String>,
-    #[serde(default = "default_downloads")]
-    pub downloads: u64,
     pub homepage: Option<String>,
     pub readme: Option<String>,
     pub repository: Option<String>,
-}
-
-
-fn default_downloads() -> u64 {
-    13371337
 }
 
 #[derive(Deserialize)]
