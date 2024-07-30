@@ -431,7 +431,7 @@ pub mod db_dump {
         pub updated_at: SystemTime,
         pub description: Option<String>,
         pub documentation: Option<String>,
-        pub downloads: u64,
+        pub downloads: Option<u64>,
         pub homepage: Option<String>,
         pub readme: Option<String>,
         pub repository: Option<String>,
