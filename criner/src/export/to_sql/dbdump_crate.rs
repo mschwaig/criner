@@ -145,7 +145,7 @@ fn do_it(input_statement: &mut rusqlite::Statement, transaction: &rusqlite::Tran
             to_seconds_since_epoch(updated_at),
             description,
             documentation,
-            downloads,
+            downloads as i64,
             homepage,
             readme,
             repository,

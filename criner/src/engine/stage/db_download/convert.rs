@@ -112,7 +112,7 @@ impl From<csv_model::Crate> for db_dump::Crate {
             updated_at,
             description,
             documentation,
-            downloads: None,
+            downloads: 0, // temporary placeholder value
             homepage,
             readme,
             repository,
@@ -273,7 +273,7 @@ pub fn into_crates(
         krate.versions = versions;
 
         // Set the downloads count from crate_downloads.csv
-        krate.downloads = crate_downloads.get(&crate_id).copied();
+        krate.downloads = *crate_downloads.get(&crate_id).unwrap();
 
         crate_by_id.insert(crate_id, krate);
     }
